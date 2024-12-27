@@ -12,7 +12,7 @@
     "module": [
         {
             "search": {
-                "url": "https://hianime.to/search",
+                "url": "https://hianime.to/search?keyword=",
                 "parameter": "query",
                 "documentSelector": "div.search-results div.result-item",
                 "title": "h3.title",
