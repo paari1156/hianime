@@ -1,51 +1,53 @@
 {
-    "name": "hianime.to",
+    "name": "HiAnime",
     "version": "1.0.0",
     "author": {
         "name": "sobet",
         "website": "https://google.com"
     },
-    "iconURL": "https://example.com/icon.png",
-    "stream": "MP4",
+    "iconURL": "https://hianime.to/images/logo.png",
+    "stream": "HLS",
     "language": "EN",
-    "extractor": "normal",
+    "extractor": "pattern-hls",
     "module": [
         {
             "search": {
                 "url": "https://hianime.to/search?keyword=",
-                "parameter": "query",
-                "documentSelector": "div.search-results div.result-item",
-                "title": "h3.title",
+                "parameter": "keyword",
+                "documentSelector": "div.flw-item",
+                "title": "h3.film-name > a",
                 "image": {
-                    "url": "img",
-                    "attribute": "src"
+                    "url": "img.film-poster-img",
+                    "attribute": "data-src"
                 },
-                "href": "a"
+                "href": "h3.film-name > a"
             },
             "featured": {
-                "url": "https://hianime.to/featured",
-                "documentSelector": "div.featured-items div.item",
-                "title": "a.name",
+                "url": "https://hianime.to/home",
+                "documentSelector": "div.flw-item",
+                "title": "h3.film-name > a",
                 "image": {
-                    "url": "img",
-                    "attribute": "src"
+                    "url": "img.film-poster-img",
+                    "attribute": "data-src"
                 },
-                "href": "a"
+                "href": "h3.film-name > a"
             },
             "details": {
                 "baseURL": "https://hianime.to",
                 "aliases": {
-                    "selector": "div.aliases",
+                    "selector": "h2.film-name",
                     "attribute": "text"
                 },
-                "synopsis": "div.synopsis",
-                "airdate": "div.airdate",
-                "stars": "div.stars"
+                "synopsis": "div.film-description",
+                "airdate": "span:contains('Released:')",
+                "stars": "span:contains('Rating:')"
             },
             "episodes": {
-                "selector": "div.episode-list a.episode",
-                "order": "ordered",
-                "pattern": "https://hianime.to/episode/[\\w-]+"
+                "selector": "div#episodes-page-1 div.episodes-ul a",
+                "order": "reversed",
+                "pattern": "https://[^\"]*\\.(?:m3u8|mp4)\\?token=[^\"]*",
+                "title": "a",
+                "href": "href"
             }
         }
     ]
